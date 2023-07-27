@@ -30,6 +30,10 @@
   }
 
   .select-option {
-    @apply py-3 rounded-md focus:outline-0;
+    @apply py-3 rounded-md focus:outline-0 px-3;
+  }
+
+  .btn {
+    @apply bg-blue-600 hover:bg-blue-800 text-blue-100 rounded-md w-full p-4 mt-8;
   }
 }

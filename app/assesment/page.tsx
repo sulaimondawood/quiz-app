@@ -1,7 +1,29 @@
-import Button from "@/component/button/Button";
-import React from "react";
+"use client";
+
+import Button from "@/components/button/Button";
+import { StateProvider } from "@/context/StateContext";
+import useQuestions from "@/hooks/useQuestions";
+import React, { useContext, useEffect } from "react";
 
 const Assesment = () => {
+  const { diff, inputVal, category, setDiff, setInputVal, setCategory } =
+    useContext(StateProvider);
+
+  const { getQuestions, questions } = useQuestions();
+
+  const fetchFunc = async () => {
+    const res = await fetch(
+      `https://opentdb.com/api.php?amount=${inputVal}&category=${category}&difficulty=${diff}`
+    );
+    console.log(res.json());
+  };
+  useEffect(() => {
+    // getQuestions(parseInt(inputVal) as any, category, diff);
+    // console.log(questions);
+
+    fetchFunc();
+  }, []);
+
   return (
     <div className="setup-card relative top-1/2 -translate-y-1/2">
       <h1 className="text-center text-white text-2xl font-semibold">
