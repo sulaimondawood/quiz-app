@@ -22,7 +22,7 @@
 
 @layer utilities {
   .setup-card {
-    @apply bg-gray-800 flex flex-col items-center justify-center w-96 shadow-xl rounded-md p-[1.5rem] mx-auto;
+    @apply bg-gray-800 flex flex-col justify-center w-full md:w-96 shadow-xl rounded-md p-4 md:p-[1.5rem] mx-auto md:h-auto;
   }
 
   .quiz-setup-div {
@@ -30,10 +30,18 @@
   }
 
   .select-option {
-    @apply py-3 rounded-md focus:outline-0 px-3;
+    @apply py-2 md:py-3 rounded-md focus:outline-0 px-3;
   }
 
   .btn {
-    @apply bg-blue-600 hover:bg-blue-800 text-blue-100 rounded-md w-full p-4 mt-8;
+    @apply bg-blue-600 hover:bg-blue-800 text-blue-100 rounded-md w-full p-3 md:p-4 mt-8;
+  }
+
+  .question {
+    @apply py-3 md:py-4 rounded-md w-full text-xs md:text-sm text-white border border-gray-500 hover:bg-gray-400 indent-3;
+  }
+
+  .checked {
+    @apply py-3 md:py-4 rounded-md w-full bg-white text-black border border-gray-500  indent-3;
   }
 }

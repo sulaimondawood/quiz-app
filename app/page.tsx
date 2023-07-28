@@ -3,30 +3,12 @@
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
 import useQuestions from "@/hooks/useQuestions";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { StateProvider } from "@/context/StateContext";
 
 export default function Home() {
   const { diff, inputVal, category, setDiff, setInputVal, setCategory } =
     useContext(StateProvider);
-
-  let handleSelectCategory: any;
-  let handleSelectDifficult;
-  // useEffect that keeps track of state
-  useEffect(() => {
-    // handles select state
-    handleSelectDifficult = (e: ChangeEvent<HTMLSelectElement>) => {
-      const value = e.target.value;
-      setDiff(value);
-      // setDifficultyLevel(value);
-      console.log(diff);
-    };
-    handleSelectCategory = (e: ChangeEvent<HTMLSelectElement>) => {
-      const value = e.target.value;
-      setCategory(value);
-      console.log(category);
-    };
-  }, [diff, category]);
 
   const router = useRouter();
   const handleNavigation = (e: any) => {
@@ -40,12 +22,12 @@ export default function Home() {
   useEffect(() => {
     getCategories();
   }, []);
-  console.log(categories);
+  // console.log(categories);
 
   return (
-    <main className="relative flex items-center justify-center top-1/2 -translate-y-1/2">
+    <main className="relative px-4 flex items-center justify-center top-1/2 -translate-y-1/2">
       <div className="setup-card">
-        <h2 className="text-center text-white text-2xl font-semibold">
+        <h2 className="text-center text-white text-xl md:text-2xl font-semibold">
           Quiz App
         </h2>
         <div className="w-full">
@@ -55,10 +37,11 @@ export default function Home() {
                 Category
               </label>
               <select
+                required
                 className="select-option"
-                // name="category"
+                value={category}
                 id="category"
-                onChange={handleSelectCategory}
+                onChange={(e) => setCategory(e.target.value)}
               >
                 {categories.map((item: { id: number; name: string }) => {
                   const { id, name } = item;
@@ -67,7 +50,7 @@ export default function Home() {
                     <option
                       key={id}
                       className="appearance-none py-2"
-                      value={name}
+                      value={id}
                     >
                       {name}
                     </option>
@@ -81,10 +64,11 @@ export default function Home() {
                 Difficulty Level
               </label>
               <select
+                required
                 className="select-option"
-                // name="category"
+                value={diff}
                 id="difficulty"
-                onChange={handleSelectDifficult}
+                onChange={(e) => setDiff(e.target.value)}
               >
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
@@ -96,6 +80,7 @@ export default function Home() {
                 No of Questions
               </label>
               <input
+                required
                 className="select-option"
                 type="number"
                 value={inputVal}
