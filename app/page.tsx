@@ -2,9 +2,11 @@
 
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
+// useRouter
 import useQuestions from "@/hooks/useQuestions";
 import { useContext, useEffect } from "react";
 import { StateProvider } from "@/context/StateContext";
+// import { useRouter } from "next/router";
 
 export default function Home() {
   const { diff, inputVal, category, setDiff, setInputVal, setCategory } =
@@ -87,8 +89,9 @@ export default function Home() {
                 onChange={(e) => setInputVal(e.target.value)}
               />
             </div>
-
-            <Button>Start Quiz</Button>
+            <button type="button" onClick={handleNavigation} className="btn">
+              Start Quiz
+            </button>
           </form>
         </div>
       </div>

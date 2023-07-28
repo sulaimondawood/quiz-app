@@ -92,11 +92,12 @@ const Assesment = () => {
                         return (
                           <label
                             key={index}
-                            className={
-                              selectedOptionIndex === index
-                                ? "checked"
-                                : "question"
-                            }
+                            // className={
+                            //   selectedOptionIndex === index
+                            //     ? "checked"
+                            //     : "question"
+                            // }
+                            className="question"
                           >
                             <input
                               className="hidden"
