@@ -21,7 +21,7 @@ const useQuestions = () => {
   const getCategories = async () => {
     try {
       const data = await fetchCategories();
-      console.log(data);
+
       setCategories(data);
     } catch (error) {
       console.log(error);
