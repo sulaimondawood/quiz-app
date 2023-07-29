@@ -1,14 +1,12 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import fetchCategories from "@/helpers/fetchCategories";
-import fetchQuizQuestions from "@/helpers/fetchQuizQuestions";
 import { StateProvider } from "@/context/StateContext";
 
 const useQuestions = () => {
   const [questions, setQuestions] = useState<any>([]);
   const [categories, setCategories] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
 
   const {
     diff,
@@ -16,7 +14,7 @@ const useQuestions = () => {
     category,
 
     setIsLoading,
-    modifiedQues,
+
     setModifiedQues,
   } = useContext(StateProvider);
 
@@ -38,7 +36,8 @@ const useQuestions = () => {
     }
     return array;
   };
-  //
+
+  // handling questions calling
   const getQuestions = async () => {
     try {
       const res = await fetch(
@@ -63,11 +62,8 @@ const useQuestions = () => {
         };
       });
 
-      // console.log(formattedQuestions);
-
       setModifiedQues(formattedQuestions);
       setIsLoading(false);
-      console.log(modifiedQues);
     } catch (error) {
       console.error("Error fetching question", error);
     }
