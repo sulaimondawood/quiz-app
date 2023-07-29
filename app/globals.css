@@ -22,7 +22,7 @@
 
 @layer utilities {
   .setup-card {
-    @apply bg-gray-800 flex flex-col justify-center w-full md:w-96 shadow-xl rounded-md p-4 md:p-[1.5rem] mx-auto md:h-auto;
+    @apply bg-gray-800 flex flex-col justify-center w-full md:w-[450px] shadow-xl rounded-md p-4 md:p-[1.5rem] mx-auto md:h-auto;
   }
 
   .quiz-setup-div {

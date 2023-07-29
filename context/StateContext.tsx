@@ -9,7 +9,7 @@ const StateContext = ({ children }: { children: ReactNode }) => {
   const [category, setCategory] = useState("");
   const [diff, setDiff] = useState("");
   const [modifiedQues, setModifiedQues] = useState();
-  const [inputVal, setInputVal] = useState(null);
+  const [inputVal, setInputVal] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   return (

@@ -3,21 +3,25 @@
 import { StateProvider } from "@/context/StateContext";
 import useQuestions from "@/hooks/useQuestions";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 
 const Assesment = () => {
   const [currentQue, setCurrentQue] = useState(0);
-  const [checked, setChecked] = useState(null);
+  const [checked, setChecked] = useState(true);
   const [showResult, setShowresult] = useState(false);
   const [userAnswers, setUserAnswers] = useState<{ [key: number]: string }>({});
   const [selectedOptionIndex, setSelectedOptionIndex] = useState<number | null>(
     null
   );
+  const router = useRouter();
 
   //context
   const { isLoading, modifiedQues } = useContext(StateProvider);
 
   const handleQuestions = () => {
+    setSelectedOptionIndex(null);
+    setChecked(true);
     if (currentQue + 1 === modifiedQues.length) {
       setShowresult(true);
       console.log(showResult);
@@ -26,7 +30,6 @@ const Assesment = () => {
         return prev + 1;
       });
     }
-    console.log(currentQue);
   };
 
   const handleAnswerSelection = (
@@ -40,6 +43,7 @@ const Assesment = () => {
     }));
 
     setSelectedOptionIndex(optionIndex);
+    setChecked(false);
   };
 
   const calculateScore = () => {
@@ -50,6 +54,10 @@ const Assesment = () => {
       }
     });
     return score;
+  };
+
+  const handleReset = () => {
+    router.push("/");
   };
 
   const { getQuestions } = useQuestions();
@@ -75,7 +83,7 @@ const Assesment = () => {
           </div>
         ) : (
           <div className="">
-            <div className="mt-6">
+            <div className="mt-4">
               <h1 className="text-gray-300 font-medium text-lg">
                 Question {currentQue + 1}
               </h1>
@@ -84,7 +92,7 @@ const Assesment = () => {
               </h3>
               <div className="mt-10 ">
                 {isLoading ? (
-                  "Loading..."
+                  <p className="text-white text-center"> please wait...</p>
                 ) : (
                   <div className="flex flex-col gap-4">
                     {modifiedQues[currentQue].options?.map(
@@ -92,12 +100,11 @@ const Assesment = () => {
                         return (
                           <label
                             key={index}
-                            // className={
-                            //   selectedOptionIndex === index
-                            //     ? "checked"
-                            //     : "question"
-                            // }
-                            className="question"
+                            className={
+                              selectedOptionIndex === index
+                                ? "checked"
+                                : "question"
+                            }
                           >
                             <input
                               className="hidden"
@@ -119,9 +126,21 @@ const Assesment = () => {
               </div>
             </div>
 
-            <button onClick={handleQuestions} className="btn">
-              {currentQue === modifiedQues?.length ? "Submit" : "Next"}
-            </button>
+            <div className="flex justify-center gap-8 align-items-center">
+              <button
+                disabled={checked}
+                onClick={handleQuestions}
+                className="btn disabled:bg-gray-200 disabled:text-gray-500 disabled:cursor-not-allowed"
+              >
+                {currentQue === modifiedQues?.length ? "Submit" : "Next"}
+              </button>
+              <button
+                onClick={handleReset}
+                className="bg-red-600 hover:bg-red-800 text-red-100 rounded-md w-full p-3 md:p-4 mt-8"
+              >
+                Reset
+              </button>
+            </div>
           </div>
         )}
       </div>
